@@ -1,29 +1,25 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+import MyNavigation from 'Navigation';
+import React from 'react';
+import { RecoilRoot} from 'recoil';
+import {DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
-import React, { useEffect, useState } from 'react';
-
-import {
-  RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue,
-} from 'recoil';
-import Home from '@pages/home';
-import TextView from '@pages/text';
+const theme = {
+  ...DefaultTheme,
+  roundness: 2,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#3498db',
+    accent: '#f1c40f',
+  },
+};
 
 const App = () => {
 
   return (
     <RecoilRoot>
-      <Home />
-      <TextView/>
+      <PaperProvider theme={theme}>
+        <MyNavigation/>
+      </PaperProvider>
     </RecoilRoot>
   );
 };
