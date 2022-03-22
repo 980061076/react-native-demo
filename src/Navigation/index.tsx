@@ -10,6 +10,22 @@ import Tendency from '@pages/tendency';
 import Collect from '@pages/collect';
 import TextView from '@pages/text';
 import Home from '@pages/home';
+//图标组件
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Ceshi from 'pages/ceshi';
+//生成统一样式的Icon
+const IconCreact = ({color,size}:{
+  focused: boolean;
+  color: string;
+  size: number;
+},IconName:string)=> <Icon
+  style={{
+    textAlign: 'center'
+  }}
+  name={IconName}
+  color={color}
+   size={size}
+  />
 
 export type RootStackParamList = {
   Home: {
@@ -103,11 +119,27 @@ export type TextViewStackNaviation = NativeStackScreenProps<RootStackParamList,'
           //   )
           // }}
           >
-            <Tab.Screen name="HomeStack" component={HomeStack} />
-            <Tab.Screen name="MyCenter" component={MyCenter} />
-            <Tab.Screen name="Tendency" component={Tendency} />
-            <Tab.Screen name="Collect" component={Collect} />
-          </Tab.Navigator>
+            <Tab.Screen options={{
+              tabBarLabel: '主页',
+              tabBarIcon: (props) => IconCreact(props,'home')
+            }} name="HomeStack" component={HomeStack} />
+            <Tab.Screen options={{
+              tabBarLabel: '趋势',
+              tabBarIcon: (props) => IconCreact(props,'signal')
+            }} name="Tendency" component={Tendency} />
+            <Tab.Screen options={{
+              tabBarLabel: '收藏',
+              tabBarIcon: (props) => IconCreact(props,'star')
+            }} name="Collect" component={Collect} />
+            <Tab.Screen options={{
+              tabBarLabel: '我的',
+              tabBarIcon: (props) => IconCreact(props,'user')
+            }} name="MyCenter" component={MyCenter} />
+            <Tab.Screen options={{
+              tabBarLabel: '测试',
+              tabBarIcon: (props) => IconCreact(props,'user')
+            }} name="Ceshi" component={Ceshi} />
+            </Tab.Navigator>
        </NavigationContainer>
    );
  };
