@@ -35,14 +35,15 @@ const BgBallView = (props:{translateWidth:number,children?:ReactNode}) => {
 const IconInView = (props:{currentIndex:number,index:number,children?:ReactNode}) => {
   //判断当前项是否为聚焦项
   const judge = props.index === props.currentIndex
-  const fadeAnim = useRef(new Animated.Value(0)).current  // 透明度初始值设为0
+
+  const fadeAnim = useRef(new Animated.Value(0)).current  // 向上位移值初始值设为0
   console.log(fadeAnim,judge,'fadeAnim')
   React.useEffect(() => {
     judge?
     Animated.timing(                  // 随时间变化而执行动画
       fadeAnim,                       // 动画中的变量值
       {
-        toValue: -20,                   // 透明度最终变为1，即完全不透明
+        toValue: -20,                   // 向上位移20个单位
         duration: 500,
         useNativeDriver:true              // 让动画持续一段时间
       }
@@ -51,7 +52,7 @@ const IconInView = (props:{currentIndex:number,index:number,children?:ReactNode}
     Animated.timing(                  // 随时间变化而执行动画
     fadeAnim,                       // 动画中的变量值
     {
-      toValue: 0,                   // 透明度最终变为1，即完全不透明
+      toValue: 0,                   // 恢复原本的位置
       duration: 300,
       useNativeDriver:true              // 让动画持续一段时间
     }
