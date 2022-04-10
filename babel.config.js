@@ -15,6 +15,7 @@ module.exports = {
           "@components": "./src/components",
           "@pages": "./src/pages",
           "@store": "./src/store",
+          "@tools": "./src/tools",
         }
       }
     ]

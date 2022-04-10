@@ -125,6 +125,14 @@ def enableHermes = project.ext.react.get("enableHermes", false);
  */
 def nativeArchitectures = project.getProperties().get("reactNativeDebugArchitectures")
 
+// allprojects{
+    
+//     maven {
+//         // Android JSC is installed from npm
+//         url("$rootDir/../node_modules/jsc-android/dist")
+//     }
+
+// }
 android {
     ndkVersion rootProject.ext.ndkVersion
 
@@ -143,6 +151,16 @@ android {
             enable enableSeparateBuildPerCPUArchitecture
             universalApk false  // If true, also generate a universal APK
             include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
+        }
+    }
+    signingConfigs {
+        release {
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
+            }
         }
     }
     signingConfigs {
@@ -194,6 +212,15 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+
+    // def useIntlJsc = false
+    // if (useIntlJsc) {
+    //     implementation 'org.webkit:android-jsc-intl:+'
+    // } else {
+    //     implementation 'org.webkit:android-jsc:+'
+    // }
+
+
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
